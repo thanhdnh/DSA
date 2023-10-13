@@ -1,58 +1,43 @@
-﻿//https://github.com/thanhdnh/DSA
-
-class Program
+﻿class Program
 {
-    static void Swap<T>(ref T a, ref T b){
-        T temp = a;
-        a = b;
-        b= temp;
+    static Array createMatrix(int[] lengths, int[] lowerbounds){
+        Array matrix = Array.CreateInstance(typeof(Single), 
+                                    lengths, 
+                                    lowerbounds
+                                    );
+        Random r = new Random();
+        for(int i=matrix.GetLowerBound(0); i<=matrix.GetUpperBound(0); i++)
+            for(int j=matrix.GetLowerBound(1); j<=matrix.GetUpperBound(1);j++)
+                matrix.SetValue(r.NextSingle(), i, j);
+        return matrix;
     }
-    static T Add<T>(T a, T b){
-        try{
-            int lenA = ((dynamic)a).Length;
-            int lenB = ((dynamic)b).Length;
-            if(a is System.String && b is System.String){
-                return (dynamic)a + (dynamic)b;
-            }else{
-                T result = (dynamic)new double[lenA+lenB];
-                int k = 0;
-                for(int i=0; i<lenA; i++)
-                    ((dynamic)result)[k++] = ((dynamic)a)[i];
-                for(int i=0; i<lenB; i++)
-                    ((dynamic)result)[k++] = ((dynamic)b)[i];
-                return result;
-            }
-        }catch(Exception e){
-            return (dynamic)a + (dynamic)b;
+    static Array addMatrices(Array a, Array b){
+        Array c = (Array)a.Clone();
+        for(int i=c.GetLowerBound(0); i<=c.GetUpperBound(0); i++)
+            for(int j=c.GetLowerBound(1); j<=c.GetUpperBound(1);j++)
+                c.SetValue((float)a.GetValue(i,j)+(float)b.GetValue(i,j), i, j);
+        return c;
+    }
+    static void printMatrix(Array x){
+        for(int i=x.GetLowerBound(0); i<=x.GetUpperBound(0); i++){
+            for(int j=x.GetLowerBound(1); j<=x.GetUpperBound(1);j++)
+                Console.Write("{0, 15}", x.GetValue(i, j));
+            Console.WriteLine();
         }
-    }
-    public static string Arr2Str(int[] ar){
-        string result = "";
-        for(int i=0; i<ar.Length; i++)
-            result += ar[i] + ", ";
-        return result;
     }
     public static void Main(string[] args)
     {
         Console.Clear();
 
-        /*int a = 5, b = 10;
-        System.Console.WriteLine("{0}+{1}={2}", a, b, Add<int>(a, b));
+        Array a = createMatrix(new int[]{2, 3}, new int[]{1, 1});
+        Array b = createMatrix(new int[]{2, 3}, new int[]{1, 1});
+        printMatrix(a);
+        System.Console.WriteLine("----");
+        printMatrix(b);
+        System.Console.WriteLine("----");
+        Array sum = addMatrices(a, b);
+        printMatrix(sum);
 
-        string s1 = "Before", s2 = "After";
-        System.Console.WriteLine("{0}+{1}={2}", s1, s2, Add<string>(s1, s2));
-        */
-
-        double[] ar1 = {1, 2, 3};
-        double[] ar2 = {4, 5};
-        //System.Console.WriteLine(Arr2Str(ar1));
-        //System.Console.WriteLine(Arr2Str(ar2));
-        //System.Console.WriteLine(Arr2Str(Add<int[]>(ar1, ar2)));
-        Timing counter = new Timing();
-        counter.startTime();
-        Add<double[]>(ar1, ar2);
-        counter.StopTime();
-        System.Console.WriteLine("Time: " + counter.Result());
         Console.ReadKey();
     }
 }
