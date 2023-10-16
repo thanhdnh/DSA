@@ -16,6 +16,19 @@ class Program
         System.Console.WriteLine(queue.GetValue(1));
         System.Console.WriteLine(queue.GetValue(3));
 
+        Stack st = new Stack();
+        st.Push(1);
+        st.Push("hello");
+
+        Stack<int> sti = new Stack<int>();
+        sti.Push(1); sti.Push(0);
+
+        Queue myqueue = new Queue();
+        myqueue.Enqueue(1); myqueue.Enqueue("Hello");
+
+        Queue<float> queuef = new Queue<float>();
+        queuef.Enqueue(1.2f);
+
         Console.ReadKey();
     }
 }
