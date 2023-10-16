@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 public class MyQueue
 {
     Node2 rear, front; 
@@ -31,9 +33,24 @@ public class MyQueue
         return d;
     }
     public double AddQueue(){
-
+        double sum = 0;
+        Node2 current = front;
+        while(current!=null){
+            double temp = (double)current.data;
+            sum += temp;
+            current = current.prev;
+        }
+        return sum;
     }
     public object GetValue(int i){
-        
+        Node2 current = front;
+        int index = 0;
+        while(current!=null){
+            if(i==index)
+                return current.data;
+            index++;
+            current = current.prev;
+        }
+        return null;
     }
 }

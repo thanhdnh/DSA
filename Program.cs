@@ -12,7 +12,9 @@ class Program
         queue.Enqueue(1.0);
         queue.Enqueue(2.0);
         queue.Enqueue(3.0);
-        
+        System.Console.WriteLine(queue.AddQueue());
+        System.Console.WriteLine(queue.GetValue(1));
+        System.Console.WriteLine(queue.GetValue(3));
 
         Console.ReadKey();
     }
