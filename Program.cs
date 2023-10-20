@@ -73,32 +73,33 @@ class Program
         return -1;
     }
     public static int BinSearch2(int[] unsortedarr, int value){
-        int[] indices = new int[unsortedarr.Length];
+        int[] sortedarr = (int[])unsortedarr.Clone();
+        int[] indices = new int[sortedarr.Length];
         for(int i=0; i<indices.Length; i++)
             indices[i] = i;
-        for(int i=0; i<unsortedarr.Length-1; i++)
-            for(int j=i+1; j<unsortedarr.Length; j++)
-                if(unsortedarr[i]>unsortedarr[j]){
-                    int temp = unsortedarr[i];
-                    unsortedarr[i] = unsortedarr[j];
-                    unsortedarr[j] = temp;
+        for(int i=0; i<sortedarr.Length-1; i++)
+            for(int j=i+1; j<sortedarr.Length; j++)
+                if(sortedarr[i]>sortedarr[j]){
+                    int temp = sortedarr[i];
+                    sortedarr[i] = sortedarr[j];
+                    sortedarr[j] = temp;
                     int tindex = indices[i];
                     indices[i] = indices[j];
                     indices[j] = tindex;
                 }
-        int result = BinSearch(unsortedarr, value);
+        int result = BinSearch(sortedarr, value);
         return (result<0)?(-1):(indices[result]);
     }
     public static void Main(string[] args)
     {
-        int[] a={1,2,3,4,5};
-        int result=RecuSearch(a,0,5);
-        Console.WriteLine(result);
-
-        
         Console.Clear();
 
-        
+        int[] a={3, 9, 2, 8, 7};
+        int result=BinSearch2(a, 8);
+        Console.WriteLine(result + "\n");
+
+        for(int i=0; i<a.Length; i++)
+            Console.WriteLine(a[i] + ", ");
 
         Console.ReadLine();
     }
