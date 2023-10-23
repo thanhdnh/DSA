@@ -1,4 +1,7 @@
-﻿public class Program
+﻿using System.ComponentModel;
+using System.Runtime.Intrinsics.Arm;
+
+public class Program
 {
   public class Node
   {
@@ -160,6 +163,25 @@
         current = current.blink;
       }
     }
+
+    //Exercise
+    public int FindMax2()
+    {
+      Node2 current = header;
+      current=current.flink;
+      int Max= int.Parse(current.element.ToString());
+      while(current.flink!=null)
+      {
+        int a = int.Parse(current.flink.element.ToString());
+        if(a>Max)
+          {
+            Max=a;
+          }
+          current=current.flink;
+      }
+      return Max;
+      
+    }
   }
   static void Main()
   {
@@ -175,14 +197,26 @@
     Console.WriteLine("Max: {0}", list.FindMax());
     Console.WriteLine("Average: {0}", list.Average());*/
 
-    DoubleLinkedList dlist = new DoubleLinkedList();
-    dlist.Insert("62", "Header");
-    dlist.Insert("45", "62");
+    /*DoubleLinkedList dlist = new DoubleLinkedList();
+    dlist.Insert("72", "Header");
+    dlist.Insert("45", "72");
     dlist.Insert("11", "45");
     dlist.Insert("40", "11");
-    dlist.Insert("69", "40");
+    dlist.Insert("79", "40");
     dlist.Print();
-    
+    Console.WriteLine("Max2: {0}", dlist.FindMax2());
+    */
+
+    LinkedList<int> llnet = new LinkedList<int>();
+    llnet.AddFirst(new LinkedListNode<int>(10));
+    LinkedListNode<int> temp = new LinkedListNode<int>(11);
+    llnet.AddLast(temp);
+    llnet.AddAfter(temp, new LinkedListNode<int>(99));
+    llnet.AddBefore(temp, new LinkedListNode<int>(999));
+    foreach(int v in llnet)
+      System.Console.Write(v + " ");
+    System.Console.WriteLine();
+
     Console.ReadLine();
   }
 }
