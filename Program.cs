@@ -165,10 +165,7 @@
     //binaryTree.Remove(37); binaryTree.Remove(22);
     //Console.WriteLine("\n>> PreOrder After Removing Operation:");
     //binaryTree.TraversePreOrder(binaryTree.Root);
-    System.Console.WriteLine("\nSo Node la");
-    System.Console.WriteLine(binaryTree.Count());
-    System.Console.WriteLine("\nTong:");
-    System.Console.WriteLine(binaryTree.Sum());
+    
     Console.ReadLine();
   }
 }
